@@ -46,12 +46,14 @@ class Window(QtWidgets.QWidget):
 
         # dial ---------------------------------------------------------------
         self.ui.dial.setMaximum(999)  # изменил максимум с 99 на 999 в dial
+        self.ui.dial.installEventFilter(self)  # установил фильтр событий для круглого переключателя dial
 
         # horizontalSlider ---------------------------------------------------
         self.ui.horizontalSlider.setMaximum(999)  # изменил максимум с 99 на 999 в horizontalSlider
 
         # lcdNumber ----------------------------------------------------------
-        self.ui.lcdNumber.setDigitCount(10)  # изменил количество отображаемых цифр с 5 до 10 (для корректного отображения двоичных значений)
+        self.ui.lcdNumber.setDigitCount(10)  # изменил количество отображаемых цифр с 5 до 10 (для корректного
+        # отображения двоичных значений)
 
     def loadData(self) -> None:
         """
@@ -125,21 +127,42 @@ class Window(QtWidgets.QWidget):
         self.ui.lcdNumber.display(self.ui.horizontalSlider.value())
 
     # events --------------------------------------------------------------
-    def keyPressEvent(self, event: QtGui.QKeyEvent) -> None:
+    def eventFilter(self, watched: QtCore.QObject, event: QtCore.QEvent) -> bool:
         """
-        Событие нажатия на клавишу '+' или '-'
-        :param event: QtGui.QKeyEvent
-        :return: None
+        Настройка дополнительного поведения для круглого переключателя dial
+        :param watched: QtCore.QObject
+        :param event: QtCore.QEvent
+        :return: bool
         """
-        match event.key():
-            case 43:
-                self.ui.dial.setValue(self.ui.dial.value() + 1)
-                self.ui.horizontalSlider.setValue(self.ui.dial.value())
-                print(self.ui.dial.value())
-            case 45:
-                self.ui.dial.setValue(self.ui.dial.value() - 1)
-                self.ui.horizontalSlider.setValue(self.ui.dial.value())
-                print(self.ui.dial.value())
+
+        if watched == self.ui.dial and event.type() == QtCore.QEvent.Type.KeyPress:
+            match event.text():
+                case '+':
+                    self.ui.dial.setValue(self.ui.dial.value() + 1)
+                    self.ui.horizontalSlider.setValue(self.ui.dial.value())
+                    print(self.ui.dial.value())
+                case '-':
+                    self.ui.dial.setValue(self.ui.dial.value() - 1)
+                    self.ui.horizontalSlider.setValue(self.ui.dial.value())
+                    print(self.ui.dial.value())
+
+        return super(Window, self).eventFilter(watched, event)
+
+    # def keyPressEvent(self, event: QtGui.QKeyEvent) -> None:
+    #     """
+    #     Событие нажатия на клавишу '+' или '-' при открытом окне приложения без привязки к виджетам
+    #     :param event: QtGui.QKeyEvent
+    #     :return: None
+    #     """
+    #     match event.text():
+    #         case '+':
+    #             self.ui.dial.setValue(self.ui.dial.value() + 1)
+    #             self.ui.horizontalSlider.setValue(self.ui.dial.value())
+    #             print(self.ui.dial.value())
+    #         case '-':
+    #             self.ui.dial.setValue(self.ui.dial.value() - 1)
+    #             self.ui.horizontalSlider.setValue(self.ui.dial.value())
+    #             print(self.ui.dial.value())
 
     def closeEvent(self, event: QtGui.QCloseEvent) -> None:
         """
