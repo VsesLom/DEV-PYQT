@@ -147,33 +147,34 @@ class Window(QtWidgets.QWidget):
             time.ctime() + " Количество подключенных мониторов: " + str(len(QtWidgets.QApplication.screens())) + '\n'
         )
         self.ui.plainTextEdit.insertPlainText(
-            time.ctime() + " Название активного монитора: " + QtWidgets.QApplication.primaryScreen().name() + '\n'
+            time.ctime() + " Название активного монитора: " + QtWidgets.QApplication.primaryScreen().name()
         )
-        self.ui.plainTextEdit.insertPlainText(
+        self.ui.plainTextEdit.appendPlainText(
             time.ctime() + " Разрешение активного монитора: " + ' x '.join(
-                map(str, (QtWidgets.QApplication.primaryScreen().geometry().size().toTuple()))) + '\n'
+                map(str, (QtWidgets.QApplication.primaryScreen().geometry().size().toTuple())))
         )
-        self.ui.plainTextEdit.insertPlainText(
-            time.ctime() + " Название активного окна: " + self.objectName() + '\n'
+        self.ui.plainTextEdit.appendPlainText(
+            time.ctime() + " Название активного окна: " + self.objectName()
         )
-        self.ui.plainTextEdit.insertPlainText(
-            time.ctime() + " Размер активного окна: " + ' x '.join(map(str, self.size().toTuple())) + '\n'
+        self.ui.plainTextEdit.appendPlainText(
+            time.ctime() + " Размер активного окна: " + ' x '.join(map(str, self.size().toTuple()))
         )
-        self.ui.plainTextEdit.insertPlainText(
+        self.ui.plainTextEdit.appendPlainText(
             time.ctime() + " Минимальный размер активного окна: " + ' x '.join(
-                map(str, (self.minimumSize().toTuple()))) + '\n'
+                map(str, (self.minimumSize().toTuple())))
         )
-        self.ui.plainTextEdit.insertPlainText(
-            time.ctime() + " Координаты активного окна: " + ', '.join(map(str, self.pos().toTuple())) + '\n'
+        self.ui.plainTextEdit.appendPlainText(
+            time.ctime() + " Координаты активного окна: " + ', '.join(map(str, self.pos().toTuple()))
         )
-        self.ui.plainTextEdit.insertPlainText(
+        self.ui.plainTextEdit.appendPlainText(
             time.ctime() + " Координаты центра активного окна: " + ', '.join(map(str, (
                 self.pos().x() + self.size().width() // 2,
-                self.pos().y() + self.size().height() // 2))) + '\n'
+                self.pos().y() + self.size().height() // 2)))
         )
-        self.ui.plainTextEdit.insertPlainText(
-            time.ctime() + " Состояние активного окна: " + self.windowState().name + '\n'
-        )
+        self.ui.plainTextEdit.appendPlainText(
+            time.ctime() + " Состояние активного окна: " + self.windowState().name
+        )  # appendPlainText вставляет данные с нового абзаца, поэтому не требует предшествующего перевода курсора на
+        # новую строку, в отличие от insertPlainText, который вставляет данные в текущее положение курсора
 
     # events --------------------------------------------------------------
     def moveEvent(self, event: QtGui.QMoveEvent) -> None:
