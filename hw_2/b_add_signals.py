@@ -161,7 +161,7 @@ class Window(QtWidgets.QWidget):
         :return: None
         """
 
-        self.plainTextEditLog.insertPlainText(self.comboBox.currentText() + '\n')
+        self.plainTextEditLog.appendPlainText(self.comboBox.currentText())
 
     def onPushButtonLineEditClicked(self) -> None:
         """
@@ -169,7 +169,7 @@ class Window(QtWidgets.QWidget):
         :return: None
         """
 
-        self.plainTextEditLog.insertPlainText(self.lineEdit.text() + '\n')
+        self.plainTextEditLog.appendPlainText(self.lineEdit.text())
 
     def onPushButtonTextEditClicked(self) -> None:
         """
@@ -177,7 +177,7 @@ class Window(QtWidgets.QWidget):
         :return: None
         """
 
-        self.plainTextEditLog.insertPlainText(self.textEdit.toPlainText() + '\n')
+        self.plainTextEditLog.appendPlainText(self.textEdit.toPlainText())
 
     def onPushButtonPlainTextEditClicked(self) -> None:
         """
@@ -185,7 +185,7 @@ class Window(QtWidgets.QWidget):
         :return: None
         """
 
-        self.plainTextEditLog.insertPlainText(self.plainTextEdit.toPlainText() + '\n')
+        self.plainTextEditLog.appendPlainText(self.plainTextEdit.toPlainText())
 
     def onPushButtonSpinBoxClicked(self) -> None:
         """
@@ -193,7 +193,7 @@ class Window(QtWidgets.QWidget):
         :return: None
         """
 
-        self.plainTextEditLog.insertPlainText(self.spinBox.cleanText() + ' -> ' + self.spinBox.text() + '\n')
+        self.plainTextEditLog.appendPlainText(self.spinBox.cleanText() + ' -> ' + self.spinBox.text())
 
     def onPushButtonDoubleSpinBoxClicked(self) -> None:
         """
@@ -201,8 +201,8 @@ class Window(QtWidgets.QWidget):
         :return: None
         """
 
-        self.plainTextEditLog.insertPlainText(
-            self.doubleSpinBox.cleanText() + ' -> ' + self.doubleSpinBox.text() + '\n'
+        self.plainTextEditLog.appendPlainText(
+            self.doubleSpinBox.cleanText() + ' -> ' + self.doubleSpinBox.text()
         )
 
     def onPushButtonTimeEditClicked(self) -> None:
@@ -211,7 +211,7 @@ class Window(QtWidgets.QWidget):
         :return: None
         """
 
-        self.plainTextEditLog.insertPlainText(self.timeEdit.text() + '\n')
+        self.plainTextEditLog.appendPlainText(self.timeEdit.text())
 
     def onPushButtonDateTimeEditClicked(self) -> None:
         """
@@ -219,7 +219,7 @@ class Window(QtWidgets.QWidget):
         :return: None
         """
 
-        self.plainTextEditLog.insertPlainText(self.dateTimeEdit.text() + '\n')
+        self.plainTextEditLog.appendPlainText(self.dateTimeEdit.text())
 
     def changeComboBoxIndex(self) -> None:
         """
@@ -227,8 +227,8 @@ class Window(QtWidgets.QWidget):
         :return: None
         """
 
-        self.plainTextEditLog.insertPlainText(
-            'Индекс №' + str(self.comboBox.currentIndex()) + ' -> ' + self.comboBox.currentText() + '\n'
+        self.plainTextEditLog.appendPlainText(
+            'Индекс №' + str(self.comboBox.currentIndex()) + ' -> ' + self.comboBox.currentText()
         )
 
     def changeSpinBoxValue(self) -> None:
@@ -237,7 +237,7 @@ class Window(QtWidgets.QWidget):
         :return: None
         """
 
-        self.plainTextEditLog.insertPlainText(self.spinBox.cleanText() + '\n')
+        self.plainTextEditLog.appendPlainText(self.spinBox.cleanText())
 
     def changeDateTimeEditValue(self) -> None:
         """
@@ -245,7 +245,7 @@ class Window(QtWidgets.QWidget):
         :return: None
         """
 
-        self.plainTextEditLog.insertPlainText(self.dateTimeEdit.text() + '\n')
+        self.plainTextEditLog.appendPlainText(self.dateTimeEdit.text())
 
 
 if __name__ == "__main__":
