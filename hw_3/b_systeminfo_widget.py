@@ -17,7 +17,7 @@ from PySide6 import QtWidgets, QtCore
 from a_threads import SystemInfo
 
 
-class Window(QtWidgets.QWidget):
+class SystemInfoWidget(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -43,11 +43,11 @@ class Window(QtWidgets.QWidget):
 
         # window -------------------------------------------------------------
         self.setWindowTitle("Диспетчер ПК")
-        self.setMinimumSize(280, 120)
-        self.setMaximumSize(280, 120)
+        # self.setMinimumSize(320, 110)
+        # self.setMaximumSize(320, 120)
 
         # spinBoxDelaySI -------------------------------------------------------
-        labelspinBoxDelaySI = QtWidgets.QLabel("Пауза после получения данных:")
+        labelspinBoxDelaySI = QtWidgets.QLabel("Пауза после получения данных о системе:")
         labelspinBoxDelaySI.setSizePolicy(
             QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Preferred
         )
@@ -127,7 +127,7 @@ class Window(QtWidgets.QWidget):
 if __name__ == "__main__":
     app = QtWidgets.QApplication()
 
-    window = Window()
+    window = SystemInfoWidget()
     window.show()
 
     app.exec()

@@ -15,7 +15,7 @@ from PySide6 import QtWidgets
 from a_threads import WeatherHandler
 
 
-class Window(QtWidgets.QWidget):
+class WeatherInfoWidget(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -83,8 +83,8 @@ class Window(QtWidgets.QWidget):
 
         # window -------------------------------------------------------------
         self.setWindowTitle("Погода")
-        self.setMinimumSize(280, 280)
-        self.setMaximumSize(280, 280)
+        # self.setMinimumSize(320, 220)
+        # self.setMaximumSize(320, 220)
 
         # comboBoxCities -----------------------------------------------------
         self.comboBoxCities = QtWidgets.QComboBox()
@@ -125,7 +125,7 @@ class Window(QtWidgets.QWidget):
         layoutDblSBoxLatLon.addWidget(self.dblSBoxLongitude)
 
         # spinBoxDelay -------------------------------------------------------
-        labelSpinBoxDelay = QtWidgets.QLabel("Пауза после получения данных:")
+        labelSpinBoxDelay = QtWidgets.QLabel("Пауза после получения данных о погоде:")
         labelSpinBoxDelay.setSizePolicy(
             QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Preferred
         )
@@ -301,7 +301,7 @@ class Window(QtWidgets.QWidget):
 if __name__ == "__main__":
     app = QtWidgets.QApplication()
 
-    window = Window()
+    window = WeatherInfoWidget()
     window.show()
 
     app.exec()
