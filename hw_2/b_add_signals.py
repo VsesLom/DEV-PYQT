@@ -116,8 +116,7 @@ class Window(QtWidgets.QWidget):
         layoutLog.addWidget(self.plainTextEditLog)
         layoutLog.addWidget(self.pushButtonClearLog)
 
-        # main layout
-
+        # main layout --------------------------------------------------------
         layoutMain = QtWidgets.QVBoxLayout()
         layoutMain.addLayout(layoutComboBox)
         layoutMain.addLayout(layoutLineEdit)
@@ -153,7 +152,7 @@ class Window(QtWidgets.QWidget):
 
     # slots --------------------------------------------------------------
     # Самостоятельная реализация слотов для сигналов
-    # Заменил в слотах setPlainText на insertPlainText с переводом каретки на новую строку (\n)!!!
+    # Заменил в слотах setPlainText на appendPlainText!!!
 
     def onPushButtonComboBoxClicked(self) -> None:
         """
