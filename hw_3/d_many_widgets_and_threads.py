@@ -2,7 +2,7 @@
 Реализовать окно, которое будет объединять в себе сразу два предыдущих виджета
 """
 
-from PySide6 import QtWidgets, QtCore
+from PySide6 import QtWidgets
 
 from b_systeminfo_widget import SystemInfoWidget
 
