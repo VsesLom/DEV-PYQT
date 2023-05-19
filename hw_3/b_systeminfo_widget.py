@@ -12,7 +12,7 @@
 реагировать на изменение времени задержки
 """
 
-from PySide6 import QtWidgets, QtCore
+from PySide6 import QtWidgets, QtCore, QtGui
 
 from a_threads import SystemInfo
 
@@ -33,6 +33,7 @@ class SystemInfoWidget(QtWidgets.QWidget):
         """
 
         self.threadSI = SystemInfo()
+        self.threadSI.status = True
         self.threadSI.start()
 
     def initUi(self) -> None:
@@ -122,6 +123,18 @@ class SystemInfoWidget(QtWidgets.QWidget):
         self.labelRAM.setText(
                 f"<big><b style='color: {colorRAM}'>ОЗУ</b> <i style='color: {colorRAM}'>загружено на {data[1]} %</i></big>"
             )
+
+    def closeEvent(self, event: QtGui.QCloseEvent) -> None:
+        """
+        Событие закрытия окна
+        :param event: QtGui.QCloseEvent
+        :return: None
+        """
+
+        self.threadSI.status = False
+        self.threadSI.quit()
+        self.threadSI.wait(1000)
+        self.threadSI.finished.connect(self.threadSI.deleteLater)
 
 
 if __name__ == "__main__":
