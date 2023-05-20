@@ -39,9 +39,18 @@ class SystemInfo(QtCore.QThread):
             raise TypeError("Значение status должно быть типа bool!")
         self.__status = value
 
-    def setDelay(self, value: int) -> None:
+    @property
+    def delay(self) -> int:
         """
-        Метод для установки времени задержки получения информации о системе
+        Свойство-геттер для получения текущего времени задержки до получения информации о системе
+        :return: текущее значение задержки в секундах
+        """
+        return self.__delay
+
+    @delay.setter
+    def delay(self, value: int) -> None:
+        """
+        Свойство-сеттер для установки времени задержки до получения информации о системе
         :param value: новое значение задержки в секундах
         :return: None
         """
@@ -91,10 +100,19 @@ class WeatherHandler(QtCore.QThread):
             raise TypeError("Значение status должно быть типа bool!")
         self.__status = value
 
-    def setDelay(self, value: int) -> None:
+    @property
+    def delay(self) -> int:
         """
-        Метод для установки времени задержки обновления сайта
-        :param delay: время задержки обновления информации о доступности сайта
+        Свойство-геттер для получения текущего времени задержки до обновления сайта
+        :return: текущее значение задержки в секундах
+        """
+        return self.__delay
+
+    @delay.setter
+    def delay(self, value: int) -> None:
+        """
+        Свойство-сеттер для установки времени задержки до обновления сайта
+        :param value: новое значение задержки в секундах
         :return: None
         """
         if not isinstance(value, int):

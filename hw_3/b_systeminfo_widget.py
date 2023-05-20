@@ -98,7 +98,7 @@ class SystemInfoWidget(QtWidgets.QWidget):
         :return: None
         """
 
-        self.threadSI.setDelay(self.spinBoxDelaySI.value())
+        self.threadSI.delay = self.spinBoxDelaySI.value()
 
     def reportSystemInfo(self, data: list) -> None:
         """
@@ -108,9 +108,11 @@ class SystemInfoWidget(QtWidgets.QWidget):
         """
 
         def getColor(value: float) -> str:
-            if value < 33.3:
+            if value < 25.0:
                 return 'green'
-            elif 33.3 <= value < 66.6:
+            elif 25.0 <= value < 50.0:
+                return 'gold'
+            elif 50.0 <= value < 75.0:
                 return 'orange'
             else:
                 return 'red'
@@ -132,10 +134,10 @@ class SystemInfoWidget(QtWidgets.QWidget):
         """
 
         self.threadSI.status = False
-        self.threadSI.quit()
-        self.threadSI.wait(1000)
+        self.threadSI.wait(deadline=(self.threadSI.delay * 1000))
         self.threadSI.finished.connect(self.threadSI.deleteLater)
 
+        # QtCore.QDeadlineTimer.deadline()
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication()
