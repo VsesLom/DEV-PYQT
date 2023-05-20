@@ -10,7 +10,7 @@
 4. поток необходимо запускать и останавливать при нажатие на кнопку
 """
 
-from PySide6 import QtWidgets
+from PySide6 import QtWidgets, QtGui
 
 from a_threads import WeatherHandler
 
@@ -19,6 +19,7 @@ class WeatherInfoWidget(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.__hasСreatedThreadWH = False
         self.__cities = {
             'Амстердам': (52.37, 4.89),
             'Андорра-ла-Велья': (42.51, 1.52),
@@ -195,9 +196,10 @@ class WeatherInfoWidget(QtWidgets.QWidget):
         if buttonStatus:
             self.pushButtonThreadHandler.setText("Остановить получение")
             self.threadWH = WeatherHandler(self.dblSBoxLatitude.value(), self.dblSBoxLongitude.value())
-            self.threadWH.setDelay(self.spinBoxDelay.value())
+            self.threadWH.delay = self.spinBoxDelay.value()
             self.threadWH.status = True
             self.threadWH.start()
+            self.__hasСreatedThreadWH = True
             self.comboBoxCities.setEnabled(False)
             self.dblSBoxLatitude.setEnabled(False)
             self.dblSBoxLongitude.setEnabled(False)
@@ -206,6 +208,7 @@ class WeatherInfoWidget(QtWidgets.QWidget):
         else:
             self.threadWH.status = False
             self.threadWH.finished.connect(self.threadWH.deleteLater)
+            self.__hasСreatedThreadWH = False
             self.comboBoxCities.setEnabled(True)
             if not self.comboBoxCities.currentText():
                 self.dblSBoxLatitude.setEnabled(True)
@@ -296,6 +299,18 @@ class WeatherInfoWidget(QtWidgets.QWidget):
                 self.plainTEWeather.appendPlainText("Время суток: дневное")
             else:
                 self.plainTEWeather.appendPlainText("Время суток: ночное")
+
+    def closeEvent(self, event: QtGui.QCloseEvent) -> None:
+        """
+        Событие закрытия окна
+        :param event: QtGui.QCloseEvent
+        :return: None
+        """
+
+        if self.__hasСreatedThreadWH:
+            self.threadWH.status = False
+            self.threadWH.wait(deadline=(self.threadWH.delay * 1000))
+            self.threadWH.finished.connect(self.threadWH.deleteLater)
 
 
 if __name__ == "__main__":

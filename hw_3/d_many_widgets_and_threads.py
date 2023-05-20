@@ -2,7 +2,7 @@
 Реализовать окно, которое будет объединять в себе сразу два предыдущих виджета
 """
 
-from PySide6 import QtWidgets
+from PySide6 import QtWidgets, QtGui
 
 from b_systeminfo_widget import SystemInfoWidget
 
@@ -36,6 +36,16 @@ class Window(QtWidgets.QWidget):
         layout.addWidget(self.weatherInfoWidget)
 
         self.setLayout(layout)
+
+    def closeEvent(self, event: QtGui.QCloseEvent) -> None:
+        """
+        Событие закрытия окна
+        :param event: QtGui.QCloseEvent
+        :return: None
+        """
+
+        self.systemInfoWidget.close()
+        self.weatherInfoWidget.close()
 
 
 if __name__ == "__main__":
