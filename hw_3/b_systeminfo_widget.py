@@ -137,7 +137,6 @@ class SystemInfoWidget(QtWidgets.QWidget):
         self.threadSI.wait(deadline=(self.threadSI.delay * 1000))
         self.threadSI.finished.connect(self.threadSI.deleteLater)
 
-        # QtCore.QDeadlineTimer.deadline()
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication()
