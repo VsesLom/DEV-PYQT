@@ -228,9 +228,11 @@ class WeatherInfoWidget(QtWidgets.QWidget):
         """
 
         if len(data) == 1:
-            self.plainTEWeather.setPlainText(data.items()[0] + str(data.items()[1]))
+            self.plainTEWeather.setStyleSheet('color: red')
+            self.plainTEWeather.setPlainText(data['Ошибка'])
         else:
             self.plainTEWeather.clear()
+            self.plainTEWeather.setStyleSheet('color: black')
             self.plainTEWeather.appendPlainText(f"Температура воздуха: {data['current_weather']['temperature']} °C")
             self.plainTEWeather.appendPlainText(f"Скорость ветра: {data['current_weather']['windspeed']} км/ч")
             self.plainTEWeather.appendPlainText(f"Направление ветра: {data['current_weather']['winddirection']} °")

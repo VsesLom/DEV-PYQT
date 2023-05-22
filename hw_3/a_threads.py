@@ -125,13 +125,12 @@ class WeatherHandler(QtCore.QThread):
         # настройте метод для корректной работы
 
         while self.__status:
-            response = requests.get(self.__api_url)
-
-            if response.status_code != 200:
-                self.weatherResponsed.emit({'Код ошибки: ': response.status_code})
+            try:
+                response = requests.get(self.__api_url)
+            except requests.exceptions.ConnectionError:  # if response.status_code != 200:
+                self.weatherResponsed.emit({'Ошибка': 'Проверьте наличие подключения к сети Интернет!'})
                 time.sleep(1)
-                continue
-
-            data = response.json()
-            self.weatherResponsed.emit(data)
-            time.sleep(self.__delay)
+            else:
+                data = response.json()
+                self.weatherResponsed.emit(data)
+                time.sleep(self.__delay)
