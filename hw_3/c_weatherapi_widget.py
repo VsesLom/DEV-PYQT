@@ -239,63 +239,64 @@ class WeatherInfoWidget(QtWidgets.QWidget):
 
             match data['current_weather']['weathercode']:
                 case 0:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Безоблачно")
+                    weatherstatus = 'Безоблачно'
                 case 1:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Преимущественно ясно")
+                    weatherstatus = 'Преимущественно ясно'
                 case 2:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Переменная облачность")
+                    weatherstatus = 'Переменная облачность'
                 case 3:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Пасмурно")
+                    weatherstatus = 'Пасмурно'
                 case 45:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Туман")
+                    weatherstatus = 'Туман'
                 case 48:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Туман с инеем в ночные часы")
+                    weatherstatus = 'Туман с инеем в ночные часы'
                 case 51:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Морось слабой интенсивности")
+                    weatherstatus = 'Морось слабой интенсивности'
                 case 53:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Морось умеренной интенсивности")
+                    weatherstatus = 'Морось умеренной интенсивности'
                 case 55:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Морось интенсивная")
+                    weatherstatus = 'Морось интенсивная'
                 case 56:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Ледяная морось слабой интенсивности")
+                    weatherstatus = 'Ледяная морось слабой интенсивности'
                 case 57:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Ледяная морось интенсивная")
+                    weatherstatus = 'Ледяная морось интенсивная'
                 case 61:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Дождь слабой интенсивности")
+                    weatherstatus = 'Дождь слабой интенсивности'
                 case 63:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Дождь умеренной интенсивности")
+                    weatherstatus = 'Дождь умеренной интенсивности'
                 case 65:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Дождь интенсивный")
+                    weatherstatus = 'Дождь интенсивный'
                 case 66:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Ледяной дождь слабой интенсивности")
+                    weatherstatus = 'Ледяной дождь слабой интенсивности'
                 case 67:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Ледяной дождь интенсивный")
+                    weatherstatus = 'Ледяной дождь интенсивный'
                 case 71:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Снег слабой интенсивности")
+                    weatherstatus = 'Снег слабой интенсивности'
                 case 73:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Снег умеренной интенсивности")
+                    weatherstatus = 'Снег умеренной интенсивности'
                 case 75:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Снег интенсивный")
+                    weatherstatus = 'Снег интенсивный'
                 case 77:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Снежные зерна")
+                    weatherstatus = 'Снежные зерна'
                 case 80:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Ливень слабой интенсивности")
+                    weatherstatus = 'Ливень слабой интенсивности'
                 case 81:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Ливень умеренной интенсивности")
+                    weatherstatus = 'Ливень умеренной интенсивности'
                 case 82:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Ливень интенсивный")
+                    weatherstatus = 'Ливень интенсивный'
                 case 85:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Снегопад слабой интенсивности")
+                    weatherstatus = 'Снегопад слабой интенсивности'
                 case 86:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Снегопад интенсивный")
+                    weatherstatus = 'Снегопад интенсивный'
                 case 95:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Гроза")
+                    weatherstatus = 'Гроза'
                 case 96:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Гроза со слабым градом")
+                    weatherstatus = 'Гроза со слабым градом'
                 case 99:
-                    self.plainTEWeather.appendPlainText("Состояние погоды: Гроза с сильным градом")
+                    weatherstatus = 'Гроза с сильным градом'
                 case _:
-                    self.plainTEWeather.appendPlainText(f"Состояние погоды: {data['current_weather']['weathercode']}")
+                    weatherstatus = data['current_weather']['weathercode']
+            self.plainTEWeather.appendPlainText(f"Состояние погоды: {weatherstatus}")
 
             if data['current_weather']['is_day']:
                 self.plainTEWeather.appendPlainText("Время суток: дневное")
