@@ -10,6 +10,8 @@
 4. поток необходимо запускать и останавливать при нажатие на кнопку
 """
 
+import time
+
 from PySide6 import QtWidgets, QtGui
 
 from a_threads import WeatherHandler
@@ -233,6 +235,7 @@ class WeatherInfoWidget(QtWidgets.QWidget):
         else:
             self.plainTEWeather.clear()
             self.plainTEWeather.setStyleSheet('color: black')
+            self.plainTEWeather.appendPlainText(time.ctime())
             self.plainTEWeather.appendPlainText(f"Температура воздуха: {data['current_weather']['temperature']} °C")
             self.plainTEWeather.appendPlainText(f"Скорость ветра: {data['current_weather']['windspeed']} км/ч")
             self.plainTEWeather.appendPlainText(f"Направление ветра: {data['current_weather']['winddirection']} °")
