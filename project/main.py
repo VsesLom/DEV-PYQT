@@ -358,9 +358,9 @@ class TreatmentCalendar(QtWidgets.QWidget):
                     if QtCore.QDate.fromString(self.__catalog[name]['date_start'],
                                                'dd.MM.yyyy') > QtCore.QDate.fromString(self.__catalog[name]['date_stop'],
                                                                                        'dd.MM.yyyy'):
-                        self.__catalog.pop(name)
                         QtWidgets.QMessageBox.about(self, "Уведомление",
                                                     f"Лекарство {name} удалено\nиз списка принимаемых лекарств!")
+                        self.__catalog.pop(name)
                 else:
                     if self.__catalog[name].get('excluded_dates'):
                         self.__catalog[name]['excluded_dates'].append(del_date)
